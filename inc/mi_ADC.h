@@ -9,22 +9,25 @@
 #define _MI_ADC_H_
 #include "sapi.h"
 #include "mi_uart.h"
+
 /*
  * 65 Hz, 15384,6us -> 16mS -> 62,5Hz
  * 131 Hz, 7633,6us -> 8mS -> 125Hz
  * 262 Hz, 3816,8us -> 4mS -> 250Hz
  * 524 Hz, 1908,4us -> 2mS -> 500Hz
  * 1048 Hz, 954,2us -> 1mS -> 1KHz
- * 2096 Hz, 477,1us -> 1mS ->
- * 4193 Hz, 238,5us -> 1mS ->
+ * 2096 Hz, 477,1us -> 0.5mS -> 2KHz
+ * 4193 Hz, 238,5us -> 0.2mS -> 5KHz
+ * El systick interrumpe cada 0,1mS
+ * Los siguientes tiempos están expresados en mS*10
  */
-#define	FRECUENCIA_MUESTREO_62_5	16
-#define	FRECUENCIA_MUESTREO_125		8
-#define	FRECUENCIA_MUESTREO_250		4
-#define	FRECUENCIA_MUESTREO_500		2
-#define	FRECUENCIA_MUESTREO_1000	1
-#define	FRECUENCIA_MUESTREO_2000	1
-#define	FRECUENCIA_MUESTREO_4000	1
+#define	FRECUENCIA_MUESTREO_62_5	160	//!< 16mS
+#define	FRECUENCIA_MUESTREO_125		80  //!< 8mS
+#define	FRECUENCIA_MUESTREO_250		40	//!< 4mS
+#define	FRECUENCIA_MUESTREO_500		20	//!< 2mS
+#define	FRECUENCIA_MUESTREO_1000	10	//!< 1mS
+#define	FRECUENCIA_MUESTREO_2000	5	//!< 0.5mS
+#define	FRECUENCIA_MUESTREO_5000	2	//!< 0.2mS
 
 
 /*!
@@ -49,9 +52,8 @@ typedef struct{
 	uint32_t frecuencia; //!< Indica la frecuencia de muestreo a utilizar
 	packet_t paquete; //!< Variable para guardar los datos de los ADCs
 	delay_t delay; //!< Guardo el delay necesario para obtener la frecuenia de muestreo configurada
+	bool_t FlagComandoRecibido;
 }miADC_t;
-
-void ADCConfigurar(miADC_t* ptrmiADCs);
 
 /*!
  * @Brief Inicializa la MEF que controlará el funcionamiento de los ADCs
@@ -67,13 +69,22 @@ void ADCactualizarMEF(miADC_t* ptrmiADCs);
 
 /*!
  * @Brief Verifica si el ADC esta listo para adquirir
+ * @param ptrmiADCs Estructura que tiene toda la información del ADC
+ * @return TRUE si está listo para adquirir
+ * @return FALSE si no está listo para adquirir
  */
 static bool_t ADClisto(miADC_t* ptrmiADCs);
-
+/*!
+ * @Brief ejecuta accion de configuracion
+ * @param command Comando que llegó por la UART
+ * @param ptrmiADCs  Estructura que tiene toda la información del ADC
+ */
 static void ADCguardarconfiguracion(miADC_t* ptrmiADCs, cmd_t command);
 
-static bool_t ADCLeer(miADC_t* ptrmiADCs);
-
+/*!
+ * @Brief Adquiere de los ADCs que se hayan configurado y guarda los datos en la estructura
+ * @param ptrmiADCs  Estructura que tiene toda la información del ADC
+ */
 static void ADCadquirir(miADC_t* ptrmiADCs);
 
 #endif /* _MI_ADC_H_ */

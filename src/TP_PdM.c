@@ -6,7 +6,6 @@
 /*=====[Inclusions of function dependencies]=================================*/
 
 #include "TP_PdM.h"
-#include "sapi.h"
 
 /*=====[Definition macros of private constants]==============================*/
 
@@ -21,31 +20,30 @@
 int main( void )
 {
    // ----- Setup -----------------------------------
-    // Read clock settings and update SystemCoreClock variable
-    //SystemCoreClockUpdate();// Probar si hay que poner esto o no
-	boardInit();
+   boardInit();
 
-//   cyclesCounterConfig(EDU_CIAA_NXP_CLOCK_SPEED);
-//  volatile  uint32_t cyclesElapsed = 0;
-//  volatile uint32_t usElapsed = 0;
-   // Inicializar UART_USB a 115200 baudios
    uartInit( UART_USB, 1152000 );
    adcConfig( ADC_ENABLE );
+
    miADC_t miADCs;
+
+   /*!
+    * Hago que el SysTick interrumpa cada 0,1mS para poder tener una frecuencia
+    * de muestreo de 5KHz que equivale a 0,2mS
+    */
+   tickPowerSet( OFF );
+   SysTick_Config( SystemCoreClock / 10000 );
+   tickPowerSet( ON );
 
    UIinicializar();
    ADCinicializarMEF( &miADCs );
 
    // ----- Repeat for ever -------------------------
    while( true ) {
-//	   cyclesCounterReset();
+
 	   ADCactualizarMEF(&miADCs);
 
-	   UIactualizar(miADCs.estado);
-//	   cyclesElapsed = cyclesCounterRead();
-//	   usElapsed = cyclesCounterToUs(cyclesElapsed);
-	  // printf("\r\nMi estado es %d \r\n",miADCs.estado);
-      //gpioToggle(LED);
+	   UIactualizar(&miADCs);
    }
 
    // YOU NEVER REACH HERE, because this program runs directly or on a

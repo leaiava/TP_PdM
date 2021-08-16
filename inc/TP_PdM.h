@@ -13,6 +13,9 @@
 #include <stdint.h>
 #include <stddef.h>
 #include "mi_ADC.h"
+#include "mi_uart.h"
+#include "mi_UI.h"
+#include "sapi.h"
 
 /*=====[C++ - begin]=========================================================*/
 

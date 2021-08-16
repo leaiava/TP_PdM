@@ -10,12 +10,16 @@
 
 #include "sapi.h"
 #include "mi_ADC.h"
-
-#define TIEMPO_ENCENDIDO_STANDBY		50
-#define TIEMPO_APAGADO_STANDBY			1000
-#define TIEMPO_DESTELLO_CONFIGURANDO	100
-#define TIEMPO_ENCENDIDO_ADQUIRIENDO	800
-#define TIEMPO_APAGADO_ADQUIRIENDO		100
+/*!
+ * Defines para manejar los tiempos de encedido/apagado de los leds
+ * Los siguientes tiempos están expresados en mS*10
+ */
+#define TIEMPO_ENCENDIDO_STANDBY		500
+#define TIEMPO_APAGADO_STANDBY			10000
+#define TIEMPO_DESTELLO_CONFIGURANDO	1000
+#define TIEMPO_ENCENDIDO_ADQUIRIENDO	5000
+#define TIEMPO_APAGADO_ADQUIRIENDO		1000
+#define TIEMPO_COMANDO_RECIBIDO			10000
 
 /*!
  * @Brief Apaga todos los leds.
@@ -23,7 +27,12 @@
  */
 void UIinicializar(void);
 
-void UIactualizar(mis_estados_t estado);
+/*!
+ * @Brief Actualiza la MEF que maneja la interfaz de usuario
+ * @param ptrmiADCs Estructura que tiene toda la información del ADC
+ *
+ */
+void UIactualizar(miADC_t* ptrmiADCs);
 
 /*!
  * @Brief Apagar un led en particular
@@ -47,6 +56,6 @@ static bool_t ledEncender(gpioMap_t LedaEncender);
  * @return true si el led esta encendido
  * @return false si el led esta apagado
  */
-static bool_t ledEstaEncendido(gpioMap_t Led);
+static bool_t ledLeer(gpioMap_t Led);
 
 #endif /* _UI_H_ */
