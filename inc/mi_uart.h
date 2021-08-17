@@ -9,6 +9,8 @@
 #define _MI_UART_H_
 
 #include "sapi.h"
+//! Se define la velocidad de la UART
+#define	UART_VELOCIDAD	1152000
 
 /*!
  * @Brief Lista de todos los comandos que se reciben y envían por la UART
@@ -47,6 +49,12 @@ typedef struct {
 	uint16_t data_CH2; //!< Data del canal 2
 	uint16_t data_CH3; //!< Data del canal 3
 }packet_t;
+
+/*!
+ * @Brief	Inicializa la UART
+ * Selecciona por default la UART_USB y la velocidad según un define
+ */
+void UART_inicializar(void);
 
 /*!
  * @brief	Lee comandos de la UART inicializada con uartInit

@@ -6,7 +6,9 @@
  */
 #include "mi_uart.h"
 
-
+void UART_inicializar(void){
+	uartInit( UART_USB, UART_VELOCIDAD );
+}
 
 bool_t UART_getCmd(cmd_t* command){
 	//! Dependencia de sapi.h donde esta uartReadByte
@@ -32,5 +34,4 @@ void UART_sendPacket(packet_t paquete){
 	uartWriteByte( UART_USB, aux);
 	aux = (uint8_t) 0x00FF & paquete.data_CH3;
 	uartWriteByte( UART_USB, aux);
-
 }

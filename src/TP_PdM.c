@@ -11,7 +11,7 @@ int main( void )
    // ----- Setup -----------------------------------
    boardInit();
 
-   uartInit( UART_USB, 1152000 );
+   UART_inicializar();
 
    miADC_t miADCs;
 
@@ -24,7 +24,7 @@ int main( void )
    tickPowerSet( ON );
 /*!
  * Inicializo la UI.
- * Inicializo la MEF que gobierna los estados
+ * Inicializo la MEF que gobierna los estados.
  */
    UIinicializar();
    ADCinicializarMEF( &miADCs );
