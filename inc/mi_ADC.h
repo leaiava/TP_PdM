@@ -21,13 +21,13 @@
  * El systick interrumpe cada 0,1mS
  * Los siguientes tiempos están expresados en mS*10
  */
-#define	FRECUENCIA_MUESTREO_62_5	160	//!< 16mS
-#define	FRECUENCIA_MUESTREO_125		80  //!< 8mS
-#define	FRECUENCIA_MUESTREO_250		40	//!< 4mS
-#define	FRECUENCIA_MUESTREO_500		20	//!< 2mS
-#define	FRECUENCIA_MUESTREO_1000	10	//!< 1mS
-#define	FRECUENCIA_MUESTREO_2000	5	//!< 0.5mS
-#define	FRECUENCIA_MUESTREO_5000	2	//!< 0.2mS
+#define	FRECUENCIA_MUESTREO_62_5	160	//!< 16mS entre muestras
+#define	FRECUENCIA_MUESTREO_125		80  //!< 8mS entre muestras
+#define	FRECUENCIA_MUESTREO_250		40	//!< 4mS entre muestras
+#define	FRECUENCIA_MUESTREO_500		20	//!< 2mS entre muestras
+#define	FRECUENCIA_MUESTREO_1000	10	//!< 1mS entre muestras
+#define	FRECUENCIA_MUESTREO_2000	5	//!< 0.5mS entre muestras
+#define	FRECUENCIA_MUESTREO_5000	2	//!< 0.2mS entre muestras
 
 
 /*!
@@ -52,7 +52,7 @@ typedef struct{
 	uint32_t frecuencia; //!< Indica la frecuencia de muestreo a utilizar
 	packet_t paquete; //!< Variable para guardar los datos de los ADCs
 	delay_t delay; //!< Guardo el delay necesario para obtener la frecuenia de muestreo configurada
-	bool_t FlagComandoRecibido;
+	bool_t FlagComandoRecibido; //!< Flag que indica en TRUE cuando llegó un comando válido
 }miADC_t;
 
 /*!

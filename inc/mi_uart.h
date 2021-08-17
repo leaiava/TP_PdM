@@ -1,4 +1,4 @@
-/*!
+/*
  * mi_uart.h
  *
  *  Created on: Aug 5, 2021
@@ -8,7 +8,6 @@
 #ifndef _MI_UART_H_
 #define _MI_UART_H_
 
-//! @brief Dependencia externa de sapi.h
 #include "sapi.h"
 
 /*!
@@ -51,6 +50,7 @@ typedef struct {
 
 /*!
  * @brief	Lee comandos de la UART inicializada con uartInit
+ * Depende de sapi.h
  * @param command Puntero a la direccion de memoria donde guardar el comando que llega.
  * @return TRUE Si había un comando para leer.
  * @return FALSE Si no había nada para leer.

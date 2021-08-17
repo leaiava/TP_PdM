@@ -8,6 +8,7 @@
 #include "mi_ADC.h"
 
 void ADCinicializarMEF(miADC_t* ptrmiADCs){
+	adcConfig( ADC_ENABLE );
 	ptrmiADCs->estado = ESTADO_STANDBY;
 	ptrmiADCs->CH1 = false;
 	ptrmiADCs->CH2 = false;
@@ -200,8 +201,8 @@ static void ADCguardarconfiguracion(miADC_t* ptrmiADCs, cmd_t command){
 		UART_sendCmd(CMD_NO_OK);
 	break;
 	}
-	return;
 }
+
 static void ADCadquirir(miADC_t* ptrmiADCs){
 	if(ptrmiADCs->CH1){
 		ptrmiADCs->paquete.data_CH1 = adcRead(CH1);

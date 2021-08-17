@@ -10,7 +10,7 @@
 
 #include "sapi.h"
 #include "mi_ADC.h"
-/*!
+/*
  * Defines para manejar los tiempos de encedido/apagado de los leds
  * Los siguientes tiempos están expresados en mS*10
  */
@@ -29,6 +29,7 @@ void UIinicializar(void);
 
 /*!
  * @Brief Actualiza la MEF que maneja la interfaz de usuario
+ * Utiliza los mimos estados que utiliza la MEF del ADC
  * @param ptrmiADCs Estructura que tiene toda la información del ADC
  *
  */
@@ -36,9 +37,9 @@ void UIactualizar(miADC_t* ptrmiADCs);
 
 /*!
  * @Brief Apagar un led en particular
- * Recibe led a apagar
- * Devuelve 1 si pudo apagar el led
- * Devuelve 0 en caso de error
+ * @param LedaApagar Recibe led a apagar
+ * @return true si pudo apagar el led
+ * @return false en caso de error
  */
 static bool_t ledApagar(gpioMap_t LedaApagar );
 
