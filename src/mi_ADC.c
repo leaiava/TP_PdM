@@ -53,6 +53,7 @@ void ADCactualizarMEF(miADC_t* ptrmiADCs){
 			break;
 			case CMD_CHAU:{
 				UART_sendCmd(CMD_OK);
+				ADCinicializarMEF( ptrmiADCs );
 				ptrmiADCs->FlagComandoRecibido = true;
 				ptrmiADCs->estado = ESTADO_STANDBY;
 			}
@@ -99,6 +100,7 @@ void ADCactualizarMEF(miADC_t* ptrmiADCs){
 			break;
 			case CMD_CHAU:{
 				UART_sendCmd(CMD_OK);
+				ADCinicializarMEF( ptrmiADCs );
 				ptrmiADCs->FlagComandoRecibido = true;
 				ptrmiADCs->estado = ESTADO_STANDBY;
 			}
